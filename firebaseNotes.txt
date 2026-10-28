@@ -1,0 +1,111 @@
+Yes, you have to create the Firestore database yourself. Firebase doesn't create it for you. Here's the full process in the console, click by click. Firebase changes button names now and then, so some labels may differ slightly.
+
+## Step 1: Create the Firebase project
+
+1. Go to **https://console.firebase.google.com** and sign in with your Google account.
+2. Click **Create a project** (or **Add project**).
+3. Enter a project name, for example `student-app`, and click **Continue**.
+4. On the **Google Analytics** screen, turn it **off**. You don't need it.
+5. Click **Create project**, wait about 30 seconds, then click **Continue**.
+
+You're now on the **Project Overview** page.
+
+## Step 2: Register a web app (this is where the env values come from)
+
+1. On Project Overview, click the **Web icon `</>`**. It's next to the iOS and Android icons, under "Get started by adding Firebase to your app".
+2. Enter an **app nickname** such as `student-web`.
+3. **Don't** tick "Also set up Firebase Hosting".
+4. Click **Register app**.
+5. You'll see a code block with a `firebaseConfig` object:
+
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "student-app-xxxx.firebaseapp.com",
+  projectId: "student-app-xxxx",
+  storageBucket: "student-app-xxxx.firebasestorage.app",
+  messagingSenderId: "1234567890",
+  appId: "1:1234567890:web:abc123..."
+};
+```
+
+6. **These are your env values.** Copy them, then click **Continue to console**. You can ignore the `npm install firebase` instructions on that screen.
+
+### If you closed that screen and need the config again
+
+1. Click the **gear icon ⚙️** next to "Project Overview" (top left), then **Project settings**.
+2. Stay on the **General** tab and scroll down to **Your apps**.
+3. Click your web app, then under **SDK setup and configuration** choose **Config**.
+4. The same `firebaseConfig` object appears there.
+
+### Copy the values into `.env`
+
+Create `.env` in the project root, next to `package.json`. Each value from `firebaseConfig` goes on its own line:
+
+| `firebaseConfig` key | `.env` line |
+|---|---|
+| `apiKey` | `VITE_API_KEY=AIzaSy...` |
+| `authDomain` | `VITE_AUTH_DOMAIN=student-app-xxxx.firebaseapp.com` |
+| `projectId` | `VITE_PROJECT_ID=student-app-xxxx` |
+| `storageBucket` | `VITE_STORAGE_BUCKET=student-app-xxxx.firebasestorage.app` |
+| `messagingSenderId` | `VITE_MESSAGING_SENDER_ID=1234567890` |
+| `appId` | `VITE_APP_ID=1:1234567890:web:abc123...` |
+
+In `.env`, write the values **without quotes and without commas**. Restart `npm run dev` afterwards.
+
+Students often ask whether the API key is a secret. It isn't. This key only identifies your project, and the Firestore rules decide who can read or write. We still keep it in `.env` because it's good practice.
+
+## Step 3: Create the Firestore database
+
+1. In the left sidebar, open **Build** (it may be labelled **Databases & Storage**), then click **Firestore Database**.
+2. Click **Create database**.
+3. If it asks for an **edition**, choose **Standard**.
+4. **Database ID:** leave it as `(default)`.
+5. **Location:** choose `asia-south1 (Mumbai)`, or whichever region is nearest. **You can't change this later.**
+6. Click **Next**.
+7. **Security rules:** select **Start in test mode**, which allows all reads and writes for 30 days.
+8. Click **Create** and wait a few seconds.
+
+You'll now see an empty database with **Data**, **Rules**, **Indexes** and other tabs.
+
+## Step 4 (optional, good for class): Add one document by hand
+
+This shows students what Firestore data looks like before any code runs.
+
+1. On the **Data** tab, click **+ Start collection**.
+2. **Collection ID:** `students`, then click **Next**.
+3. **Document ID:** click **Auto-ID**.
+4. Add these fields:
+   - `name` (string): `Rahul`
+   - `rollNo` (string): `21CS045`
+   - `course` (string): `CSE`
+5. Click **Save**.
+
+After you run the app, call `getStudents()` and this student appears. That's a nice moment to show in class. When students add a student from the app later, they can refresh this page and watch it appear.
+
+## Step 5: Check the rules
+
+Open the **Rules** tab. In test mode you'll see something like this:
+
+```
+allow read, write: if request.time < timestamp.date(2026, 11, 28);
+```
+
+This means anyone can read and write until that date. If students get **"Missing or insufficient permissions"** later, this date has probably passed. Change it to a later date and click **Publish**.
+
+## Step 6: Back in VS Code
+
+1. Run `npm install firebase`.
+2. Create `.env` with the values from Step 2.
+3. Create `src/firebase/firebase.js`, which sets up Firebase and exports `db` (code from my previous message).
+4. Create `src/services/studentService.js` with the CRUD functions.
+5. Restart `npm run dev`.
+
+## You don't need these today
+
+- **Authentication** (only if you have time at the end; it's under Build → Authentication → Get started → Email/Password)
+- **Hosting**
+- **Storage** (new projects need the paid Blaze plan for it)
+- **Realtime Database**. This is different from Firestore, so don't let students click it by mistake.
+
+**Tip for class:** create your own project the night before as a backup. If a student's setup fails, give them your `.env` values so they can keep going.

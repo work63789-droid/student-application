@@ -1,0 +1,152 @@
+.student-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Form */
+.student-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.student-form input,
+.student-form select {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.student-form button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.student-form button:hover {
+  background: #1d4ed8;
+}
+
+/* Cards */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.student-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.student-card h3 {
+  margin: 0 0 8px;
+}
+
+.student-card p {
+  margin: 4px 0;
+  color: #555;
+}
+
+/* Buttons on the card */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn.edit {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn.delete {
+  background: #dc2626;
+  color: white;
+}
+
+/* Logged-in student's own card */
+.student-card.my-card {
+  border: 2px solid #2563eb;
+  background: #eff6ff;
+}
+
+.you-badge {
+  float: right;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: white;
+  font-size: 12px;
+}
+
+/* Login page */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.login-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-form button:disabled {
+  background: #93c5fd;
+}
+
+/* Manage Courses page */
+.course-list {
+  list-style: none;
+  padding: 0;
+  max-width: 400px;
+}
+
+.course-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.error {
+  color: #dc2626;
+}

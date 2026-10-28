@@ -1,0 +1,71 @@
+/* Shared page layout for the example pages */
+.example-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+.page-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #2563eb;
+}
+
+/* Counter page */
+.number-box {
+  margin-top: 16px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.counter-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.counter-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.counter-btn.add {
+  background: #16a34a;
+}
+
+.counter-btn.subtract {
+  background: #dc2626;
+}
+
+/* Get Todo page */
+.loading {
+  color: #555;
+}
+
+.todo-card {
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.todo-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.next-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
